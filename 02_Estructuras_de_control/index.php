@@ -54,6 +54,12 @@
                 </td>
                 <td>Ejercicios de edades</td>
             </tr>
+            <tr>
+                <td>
+                    <a href="listas.php">listas.php</a>
+                </td>
+                <td>Ejercicios de bucles</td>
+            </tr>
         </tbody>
     </table>
 </body>
