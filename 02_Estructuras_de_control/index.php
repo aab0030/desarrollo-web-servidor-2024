@@ -48,6 +48,12 @@
                 </td>
                 <td>Ejercicios de dias de la semana</td>
             </tr>
+            <tr>
+                <td>
+                    <a href="edades.php">edades.php</a>
+                </td>
+                <td>Ejercicios de edades</td>
+            </tr>
         </tbody>
     </table>
 </body>
