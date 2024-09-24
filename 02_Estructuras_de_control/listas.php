@@ -26,6 +26,15 @@
         $i++;
     endwhile;
     echo "</ul>";
+
+    /*Con un while y las estructuras de control, mostrar en la lista sin ordenar los multiplo de 3*/ 
+    $i = 1;
+    echo "<ul>";
+    while ($i <= 30){
+        if ($i % 3 == 0) echo "<li> El numero $i es multiplo de 3</li>";
+        $i++;
+    }
+    echo "</ul>";
     ?>
 </body>
 </html>
