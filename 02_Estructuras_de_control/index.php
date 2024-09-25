@@ -60,6 +60,12 @@
                 </td>
                 <td>Ejercicios de bucles</td>
             </tr>
+            <tr>
+                <td>
+                    <a href="ejercicio1.php">ejercicio1.php</a>
+                </td>
+                <td>Ejercicios</td>
+            </tr>
         </tbody>
     </table>
 </body>

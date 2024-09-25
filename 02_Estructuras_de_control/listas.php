@@ -36,5 +36,35 @@
     }
     echo "</ul>";
     ?>
+    <h3>Listas con DO WHILE</h3>
+
+    <?php
+    $i = 1;
+
+    echo "<ul>";
+    do {
+        echo "<li>$i</li>";
+        $i++;
+    } while ($i <= 10);
+    echo "</ul>";
+
+    echo "<h3>Lista con for</h3>";
+
+    echo "<ul>";
+    for($i = 1; $i <= 10; $i++){
+        echo "<li>$i</li>";
+    }
+    echo "</ul>";
+
+    echo "<h3>Lista con for 2</h3>";
+
+    echo "<ul>";
+    for($i = 1; ; $i++){
+        if ($i > 10) break;
+        echo "<li>$i</li>";
+    }
+    echo "</ul>";
+
+    ?>
 </body>
 </html>
