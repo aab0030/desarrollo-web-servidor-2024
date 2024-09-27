@@ -58,19 +58,19 @@
 
     $mes = date("F");
 
-    match ($mes) {
-        "January" => $mes = "enero",
-        "February"=> $mes = "febrero",
-        "March" => $mes = "marzo",
-        "April"=> $mes = "abril",
-        "May" => $mes = "mayo",
-        "June"=> $mes = "junio",
-        "July" => $mes = "julio",
-        "August"=> $mes = "agosto",
-        "September" => $mes = "septiembre",
-        "October"=> $mes = "octubre",
-        "November" => $mes = "noviembre",
-        "Dicember"=> $mes = "dicembre",
+    $mes = match ($mes) {
+        "January" => "enero",
+        "February"=> "febrero",
+        "March" => "marzo",
+        "April"=> "abril",
+        "May" => "mayo",
+        "June"=> "junio",
+        "July" => "julio",
+        "August"=> "agosto",
+        "September" => "septiembre",
+        "October"=> "octubre",
+        "November" => "noviembre",
+        "Dicember"=> "dicembre",
     };
 
     $año = date("Y");
@@ -82,26 +82,60 @@
     */
 
     $cont = 0;
-    $cont2 = 1;
+    $cont2 = 2;
+    $primo = true;
     $candidato = 2;
     $divisores = 0;
     echo "<ol>";
     while ($cont < 50){
-        while ($cont2 <= $candidato){
+        while ($cont2 < $candidato && $primo){
             if ($candidato % $cont2 == 0){
-                $divisores++;
+                $primo = false;
             }
             $cont2++;
         }
-        $cont2 = 1;
-        if ($divisores == 2){
+        $cont2 = 2;
+        if ($primo){
             echo "<li>$candidato</li>";
             $cont++;
         }
+        $primo = true;
         $divisores = 0;
         $candidato++;
     }
     echo "</ol>";
+
+    /* Ejercicio de Fibonnaci de los 10 primeros primos */
+
+    $fib = [
+        0,
+        1,
+    ];
+    
+    $candidato = 0;
+    $cont = 2;
+    $cont2 = 2;
+    $primo = true;
+    $primos = 0;
+    echo "<ol>";
+    while ($primos < 10){
+        $candidato = $fib[$cont - 2] + $fib[$cont - 1];
+        array_push($fib,$candidato);
+        
+        while ($cont2 < $cont && $primo){
+            if ($cont % $cont2 == 0){
+                $primo = false;
+            }
+            $cont2++;
+        }
+        $cont2 = 2;
+        if ($primo){
+            echo "<li>$candidato</li>";
+            $primos++;
+        }
+        $primo = true;
+        $cont++;
+    }
     ?>
 </body>
 </html>
