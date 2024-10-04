@@ -64,7 +64,7 @@
     unset($personas["59965961Q"]);
     print_r($personas);
     echo "<br>";
-    //$personas = array_values($personas); // Reordena el array reseteando los valores
+    $personas = array_values($personas); // Reordena el array reseteando los valores
 
     count($personas); // Devuelve la longitud del array
     print_r($personas);

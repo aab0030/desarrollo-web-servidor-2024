@@ -11,7 +11,7 @@
         ["FC24", "Deporte", 70],
         ["Dark souls", "Soulslike", 50],
         ["Hollow Knight", "Plataforma", 30]
-    ];
+    ]; 
     ?>
     <style>
         table{
@@ -21,7 +21,7 @@
             transform: rotate(45deg);
             animation: tablaGiradora 15s infinite linear;
         }
-        @keyframes tablaGiradora{
+        @keyframes tablaGirador{
             0%{
                 margin-left: 0%;
                 transform: rotate(0deg);
@@ -60,8 +60,34 @@
 
        
     <?php 
-    foreach($videojuegos as $videojuego) {
-        list($titulo, $categoria, $precio) = $videojuego;
+    $nuevo_videojuego = ["Throne and Liberty", "MMO", 0];
+    array_push($videojuegos, $nuevo_videojuego);
+    $nuevo_videojuego = ["Albion Online", "MMO", 0];
+    array_push($videojuegos, $nuevo_videojuego);
+    $nuevo_videojuego = ["Valorant", "FPS", 0];
+    array_push($videojuegos, $nuevo_videojuego);
+
+        # Ej 1
+        #$_precio = array_column($videojuegos, 2);
+        #array_multisort($_precio, SORT_ASC, $videojuegos);
+
+        # Ej 2
+        #$_precio = array_column($videojuegos, 1);
+        #array_multisort($_precio, SORT_DESC, $videojuegos);
+        
+        #$_titulo = array_column($videojuegos, 0);
+        #array_multisort($_titulo, SORT_DESC, $videojuegos);
+        #  SORT_ASC para orden ascendiente
+        #  SORT_DESC para orden descendiente
+
+        #Ej rapido 1: ordenar por el precio de barato a caro.
+        #Ej rapido 2: Ordenar por la categoria en orden alfabeticamente inverso
+
+        for ($i=0; $i < count($videojuegos); $i++) { 
+            $videojuegos[$i][4] = "X";
+        }
+        foreach($videojuegos as $videojuego) {
+            list($titulo, $categoria, $precio) = $videojuego;
     ?>
         
         <tr>
@@ -72,5 +98,6 @@
     <?php } ?>
         </tbody>
     </table>
+    
 </body>
 </html>
