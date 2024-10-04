@@ -142,8 +142,10 @@
                 ];
             ?>
             <?php
-                foreach ($alumnos as $alumno => $nota){ ?>
-                    <tr>
+                $color = "";
+                foreach ($alumnos as $alumno => $nota){ 
+                    ?>
+                    <tr bgcolor = "<?php if($nota < 5) echo "red"; else echo "green" ?>">
                         <td><?php echo $alumno ?></td>
                         <td><?php echo $nota ?></td>
                         <td>
