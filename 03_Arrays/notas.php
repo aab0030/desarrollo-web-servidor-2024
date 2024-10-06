@@ -29,7 +29,24 @@
          * 
          * Ejercicio 6:Mostrarlo todo en una tabla.
          */
-        #array_push();
+
+        array_push($notas,["Migue", "Inglés"]);
+        array_push($notas,["Migue", "Diseño de Interfaces Web"]);
+        array_push($notas,["Sofia", "Despliegue de Aplicaciones"]);
+        array_push($notas,["Sofia", "Empresa"]);
+
+        unset($notas[0]);
+
+        for ($i=0; $i < count($notas); $i++) { 
+            $notas[2][$i] = rand(1,10);
+        }
+
+        for ($i=0; $i < count($notas); $i++) { 
+            if ($notas[2][$i] >= 5) {
+                $notas[3][$i] = "Apto";
+            }else 
+                $notas[3][$i] = "No apto";
+        }
     ?>
 </body>
 </html>
