@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <?php
+        error_reporting( E_ALL );
+        ini_set( "display_errors", 1 );
+    ?>
 </head>
 <body>
     <?php
@@ -12,7 +16,7 @@
         ["Paco", "Desarrollo web cliente"],
         ["Manu", "Desarrollo web servidor"],
         ["Manu", "Desarrollo web cliente"],
-    ]
+    ];
         /**
          * Ejercicio 1: Añadir al array 4 estudiante con sus asignaturas
          * 
@@ -36,17 +40,48 @@
         array_push($notas,["Sofia", "Empresa"]);
 
         unset($notas[0]);
+        $notas = array_values($notas);
 
         for ($i=0; $i < count($notas); $i++) { 
-            $notas[2][$i] = rand(1,10);
+            $notas[$i][2] = rand(1,10);
         }
 
         for ($i=0; $i < count($notas); $i++) { 
-            if ($notas[2][$i] >= 5) {
-                $notas[3][$i] = "Apto";
+            if ($notas[$i][2] >= 5) {
+                $notas[$i][3] = "Apto";
             }else 
-                $notas[3][$i] = "No apto";
+                $notas[$i][3] = "No apto";
         }
+
+        $_nombre = array_column($notas, 0);
+        $_notas = array_column($notas, 2);
+        $_asignatura = array_column($notas, 1);
+
+        //array_multisort($_nombre,SORT_ASC,$_notas,SORT_ASC,$_asignatura,SORT_ASC,$notas);
     ?>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Asignatura</th>
+                <th>Notas</th>
+                <th>Apto¿?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($notas as $alumno){
+                list($nombre, $asignatura, $nota, $apto) = $alumno;
+                ?>
+                <tr>
+                    <td><?php echo $nombre ?></td>
+                    <td><?php echo $asignatura ?></td>
+                    <td><?php echo $nota ?></td>
+                    <td><?php echo $apto ?></td>
+                </tr>
+            <?php } ?>
+            
+        </tbody>
+    </table>
 </body>
 </html>
