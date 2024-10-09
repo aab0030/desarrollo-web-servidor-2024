@@ -14,18 +14,27 @@
     CREAR UN FORMULARIO DONDE SE INTENTE INTRODUCIR EL MÁXIMO VALOR Y SE COMPRUEBE SI HAS ACERTADO
 -->
     <?php
-        $array = [
-            rand(1,50),
-            rand(1,50),
-            rand(1,50),
-            rand(1,50),
-            rand(1,50),
-            rand(1,50),
-            rand(1,50),
-            rand(1,50),
-            rand(1,50),
-            rand(1,50)
-        ];
+        $array = [1,2,3,4,5,6,7,8];
+    ?>
+    <form action="" method = "post">
+        <label for="maximo">Máximo</label>
+        <input type="text" name ="maximo" id="maximo" placeholder ="Introduce el maximo: ">
+    </form>
+    <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $numero = $_POST["maximo"];
+
+            $candidato = $array[0];
+
+            for ($i=1; $i < count($array); $i++) { 
+                if($array[$i] > $candidato) $candidato = $array[$i];
+            }
+
+            if ($candidato == $numero)
+                echo "<h1>Has acertado</h1>";
+            else
+                echo "<h1>Has fallado</h1>";
+        }
     ?>
 </body>
 </html>
