@@ -47,16 +47,49 @@
             <?php
             foreach($productos as $producto){
                 list($nombre, $precio, $stock) = $producto;
+                if ($stock <= 0) { ?>
+                    <tr>
+                        <th><?php echo "$nombre" ?></th>
+                        <th><?php echo "$precio" ?></th>
+                        <th><?php echo "No hay stock." ?></th>
+                    </tr>
+                <?php
+                }else{
                 ?>
                 <tr>
                     <th><?php echo "$nombre" ?></th>
                     <th><?php echo "$precio" ?></th>
                     <th><?php echo "$stock" ?></th>
                 </tr>
-            <?php
+            <?php }
             }
             ?>
         </tbody>
     </table>
+    <br><br>
+    <form action="" method="post">
+        <label for="producto">Nombre del producto</label>
+        <input type="text" name="producto" id="producto">
+        <input type="submit" value="Comprobar">
+    </form>
+
+    <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $producto = $_POST["producto"];
+            
+            $num = 0;
+            $encontrado = false;
+            while ($num < count($productos) && !$encontrado) {
+                if ($productos[$num][0] == $producto) {
+                    $encontrado = true;
+                }
+                $num++;
+            }
+            if($encontrado){
+                echo "<p>Tenemos ".$productos[($num - 1)][2]." unidades en stock</p>";
+            } else
+                echo "<p>No tenemos</p>";
+        }
+    ?>
 </body>
 </html>
