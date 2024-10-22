@@ -7,6 +7,8 @@
     <?php
     error_reporting( E_ALL );
     ini_set( "display_errors", 1 );
+
+    require('../05_funciones/edades.php');
     ?>
 </head>
 <body>
@@ -16,6 +18,17 @@
         <input type="hidden" name="accion" value = "formulario_edad">
         <input type="submit" value="Comprobar">
     </form>
+
+    <?php
+    if ($_SERVER["REQUEST_METHOD"]== "POST"){
+        if ($_POST["accion"] == "formulario_edad") {
+            // Comprobar campos vacios
+            $nombre= $_POST ["nombre"];
+            $edad = $_POST ["edad"];
+            comprobarEdad($nombre,$edad);
+        }
+    }
+    ?>
     <br><br>
     <form action="" method="post">
         <input type="text" name="base" placeholder="base"><br><br>
@@ -27,20 +40,12 @@
     
     <?php
     if ($_SERVER["REQUEST_METHOD"]== "POST"){
-        if ($_POST["accion"] == "formulario_edad") {
-            // Comprobar campos vacios
-            if ($_POST["nombre"] != '' and $_POST["edad"] != '') {
-                $nombre= $_POST ["nombre"];
-                $edad = $_POST ["edad"];
-            }
-        }
-
         if ($_POST["accion"] == "formulario_potencia") {
-            
-            if ($_POST["base"] != '' and $_POST["exponente"] != '') {
-                $base = $_POST ["base"];
-                $exponente = $_POST ["exponente"];
-            }
+            $base = $_POST ["base"];
+            $exponente = $_POST ["exponente"];
+            if ($base != '' and $exponente != '') {
+                echo potencia($base,$exponente);
+            }else echo "Por favor, introduce datos.";
         }
     }
     ?>
