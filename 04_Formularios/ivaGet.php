@@ -20,12 +20,11 @@
     </form>
 
     <?php
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $tipo_IVA = $_POST["iva"];
-        $precio = $_POST["precio"];
-        if ($precio == "" or $tipo_IVA == "")
-            echo "Por favor, introduzca datos.";
-        else{
+    if(isset($_GET["precio"]) and isset($_GET["iva "])){
+        $tipo_IVA = $_GET["iva"];
+        $precio = $_GET["precio"];
+
+        if ($precio != "" or $precio != "") {
             define("GENERAL", 1.21);
             define("REDUCIDO", 1.1);
             define("SUPERREDUCIDO", 1.04);
@@ -37,20 +36,6 @@
             };
             echo "<p>PVP: ".$precio."</p>";
         }
-    }
-    if($_SERVER["REQUEST_METHOD"] == "GET"){
-        $tipo_IVA = $_GET["iva"];
-        $precio = $_GET["precio"];
-        define("GENERAL", 1.21);
-        define("REDUCIDO", 1.1);
-        define("SUPERREDUCIDO", 1.04);
-
-        $precio = match ($tipo_IVA) {
-            "general" => ($precio * GENERAL),
-            "reducido" => ($precio * REDUCIDO),
-            "superreducido" => ($precio * SUPERREDUCIDO),
-        };
-        echo "<p>PVP: ".$precio."</p>";
     }
     ?>
 </body>

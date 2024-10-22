@@ -27,15 +27,18 @@
         $candidato = $_POST["numero1"];
         $num1 = $_POST["numero2"];
         $num2 = $_POST["numero3"];
+        if ($candidato == "" or $num1 == "" or $num2 == "")
+            echo "Por favor, introduzca datos.";
+        else{
+            if ($candidato < $num1) {
+                $candidato = $num1;
+            }
+            if ($candidato < $num2) {
+                $candidato = $num2;
+            }
 
-        if ($candidato < $num1) {
-            $candidato = $num1;
+            echo "<h2>El numero mayor es $candidato</h2>";
         }
-        if ($candidato < $num2) {
-            $candidato = $num2;
-        }
-
-        echo "<h2>El numero mayor es $candidato</h2>";
     }
     ?>  
 </body>
