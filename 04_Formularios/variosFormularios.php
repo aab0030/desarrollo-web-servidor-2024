@@ -8,7 +8,7 @@
     error_reporting( E_ALL );
     ini_set( "display_errors", 1 );
 
-    require('../05_funciones/edades.php');
+    require('../05_funciones/funciones.php');
     ?>
 </head>
 <body>
@@ -18,7 +18,7 @@
         <input type="hidden" name="accion" value = "formulario_edad">
         <input type="submit" value="Comprobar">
     </form>
-
+    <--filter_var($tmp_base, FILTER_VALIDATE_INT) ->
     <?php
     if ($_SERVER["REQUEST_METHOD"]== "POST"){
         if ($_POST["accion"] == "formulario_edad") {
@@ -41,11 +41,28 @@
     <?php
     if ($_SERVER["REQUEST_METHOD"]== "POST"){
         if ($_POST["accion"] == "formulario_potencia") {
-            $base = $_POST ["base"];
-            $exponente = $_POST ["exponente"];
-            if ($base != '' and $exponente != '') {
-                echo potencia($base,$exponente);
-            }else echo "Por favor, introduce datos.";
+            $tmp_base = $_POST ["base"];
+            $tmp_exponente = $_POST ["exponente"];
+
+            if ($tmp_base == '') {
+                echo "Por favor, introduce base.";
+            }else{
+                if (filter_var($tmp_base, FILTER_VALIDATE_INT) === FALSE) {
+                    echo "Introduce un numero entero.";
+                }else 
+                    if($tmp_base < 0) echo "La base debe ser mayor a 0";
+                    else $base = $tmp_base;
+            }
+
+            if ($tmp_exponente == '') {
+                echo "Por favor, introduce exponente.";
+            }else{
+                if (filter_var($tmp_exponente, FILTER_VALIDATE_INT) === FALSE) {
+                    echo "Introduce un numero entero.";
+                }else 
+                    if($tmp_exponente < 0) echo "La exponente debe ser mayor a 0";
+                    else $tmp_exponente = $tmp_exponente;
+            }
         }
     }
     ?>

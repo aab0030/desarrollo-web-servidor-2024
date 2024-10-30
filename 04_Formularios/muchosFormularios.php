@@ -61,10 +61,15 @@
         if ($_POST["accion"] == "formulario_IRPF") {
             $sueldoBruto = $_POST["cantidad"];
             $cantidad = $_POST["cantidad"];
-            if ($sueldoBruto != "" or $cantidad != "")
-                calcularIRPF($sueldoBruto,$cantidad);
-            else
+
+            if ($sueldoBruto == "" )
                 echo "Introduce datos.";
+            else{
+                if ($sueldoBruto <= 0) 
+                    echo "El sueldo bruto tiene que ser mayor que 0.";
+                else
+                    echo calcularIRPF($sueldoBruto,$cantidad);
+            }
         }
     }
     ?>

@@ -59,8 +59,7 @@
         }else{
             $aPagar = $aPagar + ($cantidad * 0.19);
         }
-        echo "<b>IRPF: $aPagar</b>";
-        echo "<h1>El sueldo neto de $sueldoBruto es ".($sueldoBruto-$aPagar)."</h1>";
+        return ($sueldoBruto-$aPagar);
     }
 
     function rangoPrimos($num1,$num2){
