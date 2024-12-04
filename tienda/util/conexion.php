@@ -2,7 +2,7 @@
     $_servidor = "localhost"; // ó "127.0.0.1" (loopback)
     $_usuario = "estudiante";
     $_contrasena = "estudiante";
-    $_base_de_datos = "consolas_bd";
+    $_base_de_datos = "tienda_bd";
 
     //  Tenemos dos opciones de librerías para crear una conexion con BBDD
     //  Mysqli (más simple) ó PDO (más completa)

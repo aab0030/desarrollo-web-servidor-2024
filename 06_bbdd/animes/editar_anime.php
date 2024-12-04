@@ -15,57 +15,50 @@
 <body>
     <div class="container">
         <?php
-            $sql = "SELECT * FROM estudios ORDER BY nombre_estudio";
-            $resultado = $_conexion -> query($sql);
-            $estudios = [];
-
-            //var_dump($resultado);
-
-            while($fila = $resultado -> fetch_assoc()) {
-                array_push($estudios, $fila["nombre_estudio"]);
-            }
-            //print_r($estudios);
-
             if($_SERVER["REQUEST_METHOD"] == "POST") {
+                $id_anime = $_POST["id_anime"];
                 $titulo = $_POST["titulo"];
                 $nombre_estudio = $_POST["nombre_estudio"];
                 $anno_estreno = $_POST["anno_estreno"];
                 $num_temporadas = $_POST["num_temporadas"];
-                // $_FILES, QUE ES UN ARRAY DOBLE!!!
 
-                $direccion_temporal = $_FILES["imagen"]["tmp_name"];
-                $nombre_imagen = $_FILES["imagen"]["name"];
-                move_uploaded_file($direccion_temporal, "imagenes/$nombre_imagen");
-
-                $sql = "INSERT INTO animes 
-                    (titulo, nombre_estudio, anno_estreno, num_temporadas, imagen)
-                    VALUES
-                    ('$titulo', '$nombre_estudio', $anno_estreno, $num_temporadas, 
-                        './imagenes/$nombre_imagen')
-                ";
+                $sql = "UPDATE animes SET
+                            titulo = '$titulo',
+                            nombre_estudio = '$nombre_estudio',
+                            anno_estreno = $anno_estreno,
+                            num_temporadas = $num_temporadas
+                        WHERE id_anime = $id_anime";
 
                 $_conexion -> query($sql);
-
-                /**
-                 * INSERT INTO animes
-                 *  (titulo, nombre_estudio, anno_estreno, num_temporadas)
-                 * VALUES
-                 *  ('Doraemon', 'Toei Animation', 1979, 1);
-                 * 
-                 */
-
-                
             }
+
+            $sql = "SELECT * FROM estudios ORDER BY nombre_estudio";
+            $resultado = $_conexion -> query($sql);
+            $estudios = [];
+
+            while($fila = $resultado -> fetch_assoc()) {
+                array_push($estudios, $fila["nombre_estudio"]);
+            }
+
+            echo "<h1>" . $_GET["id_anime"] . "</h1>";
+
+            $id_anime = $_GET["id_anime"];
+            $sql = "SELECT * FROM animes WHERE id_anime = '$id_anime'";
+            $resultado = $_conexion -> query($sql);
+            $anime = $resultado -> fetch_assoc();
         ?>
         <form action="" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label class="form-label">Título</label>
-                <input class="form-control" name="titulo" type="text">
+                <input class="form-control" name="titulo" type="text" 
+                    value="<?php echo $anime["titulo"] ?>">
             </div>
             <div class="mb-3">
                 <label class="form-label">Estudio</label>
                 <select class="form-select" name="nombre_estudio">
-                    <option value="" selected disabled hidden>--- Elige un estudio ---</option>
+                    <option value="<?php echo $anime["nombre_estudio"] ?>" selected>
+                        <?php echo $anime["nombre_estudio"] ?>
+                    </option>
                     <?php foreach($estudios as $estudio) { ?>
                         <option value="<?php echo $estudio ?>">
                             <?php echo $estudio ?>
@@ -75,18 +68,21 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Año estreno</label>
-                <input class="form-control" name="anno_estreno" type="text">
+                <input class="form-control" name="anno_estreno" type="text"
+                    value="<?php echo $anime["anno_estreno"] ?>">
             </div>
             <div class="mb-3">
                 <label class="form-label">Número temporadas</label>
-                <input class="form-control" name="num_temporadas" type="text">
+                <input class="form-control" name="num_temporadas" type="text"
+                    value="<?php echo $anime["num_temporadas"] ?>">
             </div>
             <div class="mb-3">
                 <label class="form-label">Imagen</label>
                 <input class="form-control" name="imagen" type="file">
             </div>
             <div class="mb-3">
-                <input class="btn btn-primary" type="submit" value="Crear">
+                <input type="hidden" name="id_anime" value="<?php echo $anime["id_anime"] ?>">
+                <input class="btn btn-primary" type="submit" value="Modificar">
                 <a class="btn btn-secondary" href="index.php">Volver</a>
             </div>
         </form>

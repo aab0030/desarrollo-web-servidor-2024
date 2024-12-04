@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Index productos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <?php
         error_reporting( E_ALL );
         ini_set( "display_errors", 1 ); 
         
-        require('conexion.php');
+        require('../util/conexion.php');
+        require('../util/funciones.php');
 
-        session_start();
+        /* session_start();
         if(!isset($_SESSION["usuario"])) {
-            header("location: usuario/iniciar_sesion.php");
+            header("location: ../usuario/iniciar_sesion.php");
             exit;
-        }
+        } */
     ?>
     <style>
         .table-primary {
@@ -26,29 +27,26 @@
 </head>
 <body>
     <div class="container">
-        <h2>Bienvenid@ <?php echo $_SESSION["usuario"] ?></h2>
+        <!-- <h2>Bienvenid@ <?php echo $_SESSION["usuario"] ?></h2> -->
         <a class="btn btn-danger" href="usuario/cerrar_sesion.php">Cerrar sesión</a>
         <h1>Listado de animes</h1>
         <?php
             if($_SERVER["REQUEST_METHOD"] == "POST") {
-                $id_anime = $_POST["id_anime"];
+                $categoria = $_POST["categoria"];
                 //echo "<h1>$id_anime</h1>";
-                $sql = "DELETE FROM animes WHERE id_anime = '$id_anime'";
+                $sql = "DELETE FROM categorias WHERE categoria = '$categoria'";
                 $_conexion -> query($sql);
             }
 
-            $sql = "SELECT * FROM animes";
+            $sql = "SELECT * FROM categorias";
             $resultado = $_conexion -> query($sql);
         ?>
-        <a class="btn btn-secondary" href="nuevo_anime.php">Nuevo anime</a><br><br>
+        <a class="btn btn-secondary" href="nueva_categoria.php">Nueva categoria</a><br><br>
         <table class="table table-striped">
             <thead class="table-primary">
                 <tr>
-                    <th>Título</th>
-                    <th>Estudio</th>
-                    <th>Año</th>
-                    <th>Número de temporadas</th>
-                    <th>Imagen</th>
+                    <th>Categoría</th>
+                    <th>Descripción</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -58,21 +56,16 @@
                     while($fila = $resultado -> fetch_assoc()) {
                         // ["titulo"=>"Frieren","nombre_estudio"="Pierrot"...]
                         echo "<tr>";
-                        echo "<td>" . $fila["titulo"] . "</td>";
-                        echo "<td>" . $fila["nombre_estudio"] . "</td>";
-                        echo "<td>" . $fila["anno_estreno"] . "</td>";
-                        echo "<td>" . $fila["num_temporadas"] . "</td>";
+                        echo "<td>" . $fila["categoria"] . "</td>";
+                        echo "<td>" . $fila["descripcion"] . "</td>";
                         ?>
                         <td>
-                            <img width="50" heigth="80" src="<?php echo $fila["imagen"] ?>">
-                        </td>
-                        <td>
                             <a class="btn btn-primary" 
-                               href="editar_anime.php?id_anime=<?php echo $fila["id_anime"] ?>">Editar</a>
+                               href="editar_categoria.php?categoria=<?php echo $fila["categoria"] ?>">Editar</a>
                         </td>
                         <td>
                             <form action="" method="post">
-                                <input type="hidden" name="id_anime" value="<?php echo $fila["id_anime"] ?>">
+                                <input type="hidden" name="categoria" value="<?php echo $fila["categoria"] ?>">
                                 <input class="btn btn-danger" type="submit" value="Borrar">
                             </form>
                         </td>
