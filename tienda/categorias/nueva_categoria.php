@@ -12,11 +12,11 @@
         require('../util/conexion.php');
         require('../util/funciones.php');
 
-        /* session_start();
+        session_start();
         if(!isset($_SESSION["usuario"])) {
             header("location: ../usuario/iniciar_sesion.php");
             exit;
-        } */
+        }
     ?>
     <style>
         .error{
@@ -52,7 +52,7 @@
                         }elseif (strlen($tmp_nombre_categoria) > 30) {
                             $err_nombre_categoria = "El nombre de la categoría no puede tener más de 30 carácteres.";
                         }else {
-                            $patron = "/^[a-zA-ZáéíóúÁÉÍÓÚ ]{2,30}$/";
+                            $patron = "/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{2,30}$/";
                             if (!preg_match($patron,$tmp_nombre_categoria)) {
                                 $err_nombre_categoria = "El nombre de la categoría solo puede tener letras y espacios en blanco.";
                             }else $nombre_categoria = $tmp_nombre_categoria;

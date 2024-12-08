@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index productos</title>
+    <title>Index categorias</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <?php
         error_reporting( E_ALL );
@@ -12,11 +12,11 @@
         require('../util/conexion.php');
         require('../util/funciones.php');
 
-        /* session_start();
+        session_start();
         if(!isset($_SESSION["usuario"])) {
             header("location: ../usuario/iniciar_sesion.php");
             exit;
-        } */
+        }
     ?>
     <style>
         .table-primary {
@@ -27,13 +27,10 @@
 </head>
 <body>
     <div class="container">
-        <!-- <h2>Bienvenid@ <?php echo $_SESSION["usuario"] ?></h2> -->
-        <a class="btn btn-danger" href="usuario/cerrar_sesion.php">Cerrar sesión</a>
-        <h1>Listado de animes</h1>
+        <h1>Listado de categorias</h1>
         <?php
             if($_SERVER["REQUEST_METHOD"] == "POST") {
                 $categoria = $_POST["categoria"];
-                //echo "<h1>$id_anime</h1>";
                 $sql = "DELETE FROM categorias WHERE categoria = '$categoria'";
                 $_conexion -> query($sql);
             }
@@ -42,6 +39,7 @@
             $resultado = $_conexion -> query($sql);
         ?>
         <a class="btn btn-secondary" href="nueva_categoria.php">Nueva categoria</a><br><br>
+        <a class="btn btn-secondary" href="../index.php">Volver</a><br><br>
         <table class="table table-striped">
             <thead class="table-primary">
                 <tr>
@@ -54,7 +52,6 @@
             <tbody>
                 <?php
                     while($fila = $resultado -> fetch_assoc()) {
-                        // ["titulo"=>"Frieren","nombre_estudio"="Pierrot"...]
                         echo "<tr>";
                         echo "<td>" . $fila["categoria"] . "</td>";
                         echo "<td>" . $fila["descripcion"] . "</td>";

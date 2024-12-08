@@ -12,11 +12,11 @@
         require('../util/conexion.php');
         require('../util/funciones.php');
 
-        /* session_start();
+        session_start();
         if(!isset($_SESSION["usuario"])) {
             header("location: ../usuario/iniciar_sesion.php");
             exit;
-        } */
+        }
     ?>
     <style>
         .error{
